@@ -1,0 +1,19 @@
+{
+    "name": "larachan/larachan-core",
+    "license": "MIT",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "LaraChan\\Core\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaraChan\\Core\\Providers\\CoreServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

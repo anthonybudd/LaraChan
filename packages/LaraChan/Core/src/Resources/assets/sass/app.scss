@@ -1,0 +1,13 @@
+@import "./bootstrap/bootstrap.scss";
+
+.bg-primary-light{
+    background: #a4f3d2;
+}
+
+a.subtle {
+    text-decoration: none;
+    
+    &:hover {
+        text-decoration: underline;
+    }
+}

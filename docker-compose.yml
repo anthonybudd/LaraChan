@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  larachan-db:
+        image: mysql:5.7
+        restart: always
+        network_mode: bridge
+        container_name: larachan-db
+        volumes:
+            - ./.vol/larachan-db:/var/lib/mysql
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: rootsecret
+            MYSQL_DATABASE: larachan
+            MYSQL_USER: app
+            MYSQL_PASSWORD: secret
