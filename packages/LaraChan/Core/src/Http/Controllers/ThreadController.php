@@ -84,7 +84,7 @@ class ThreadController extends LaraChanBaseController
         if ($request->image) {
             $imageName = Str::uuid()->toString().'.'.$request->image->extension();
             $request->image->move(storage_path('images'), $imageName);
-            $imagePath = env('APP_URL').'/storage/images/'.$imageName
+            $imagePath = env('APP_URL').'/storage/images/'.$imageName;
         }
 
         $thread = Thread::find($threadID);

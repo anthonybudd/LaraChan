@@ -33,7 +33,7 @@ class Install extends Command
     }
 
     /**
-     * Install and configure bagisto.
+     * Install and configure larachan.
      */
     public function handle()
     {
@@ -46,32 +46,26 @@ class Install extends Command
         // running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
         $migrate = $this->call('migrate:fresh');
-        $this->info($migrate);
 
-        // running `php artisan db:seed`
-        $this->warn('Step: Seeding basic data for Bagisto kickstart...');
-        $result = $this->call('db:seed --class=LaraChan\Core\Database\Seeders\LaraChanSeeder'); // Command: php artisan db:seed --class=LaraChan\\Core\\Database\\Seeders\\LaraChanSeeder 
-        $this->info($result);
+        // running `php artisan db:seed --class=LaraChan\\Core\\Database\\Seeders\\LaraChanSeeder`
+        $this->warn('Step: Seeding DB');
+        $result = $this->call('db:seed', ['--class' => 'LaraChan\Core\Database\Seeders\LaraChanSeeder']); 
 
         // running `php artisan vendor:publish --all`
         $this->warn('Step: Publishing assets and configurations...');
-        $result = $this->call('vendor:publish', ['--all']);
-        $this->info($result);
+        $result = $this->call('vendor:publish', ['--provider' => 'LaraChan\Core\Providers\CoreServiceProvider']);
 
         // running `php artisan storage:link`
         $this->warn('Step: Linking storage directory...');
         $result = $this->call('storage:link');
-        $this->info($result);
 
         // optimizing
         $this->warn('Step: Optimizing...');
         $result = $this->call('optimize');
-        $this->info($result);
 
         // running `composer dump-autoload`
         $this->warn('Step: Composer autoload...');
         $result = shell_exec('composer dump-autoload');
-        $this->info($result);
 
         // final information
         $this->info('-----------------------------');
@@ -88,7 +82,7 @@ class Install extends Command
     {
         $envExists = File::exists(base_path() . '/.env');
 
-        if (! $envExists) {
+        if (!$envExists) {
             $this->info('Creating the environment configuration file.');
             $this->createEnvFile();
         } else {
@@ -106,41 +100,13 @@ class Install extends Command
         try {
             File::copy('.env.example', '.env');
 
-            $default_app_url =  'http://localhost:8000';
+            $this->envUpdate('DB_DATABASE=', 'larachan');
+            $this->envUpdate('DB_USERNAME=', 'app');
+            $this->envUpdate('DB_PASSWORD=', 'secret');
 
-            $default_admin_url =  'admin';
-            $input_admin_url = $this->ask('Please Enter the Admin URL : ');
-            $this->envUpdate('APP_ADMIN_URL=', $input_admin_url ?: $default_admin_url);
-
-            $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'es', 'fa', 'nl', 'pt_BR'], 1);
-            $this->envUpdate('APP_LOCALE=', $locale);
-
-            $TimeZones = timezone_identifiers_list();
-            $timezone = $this->anticipate('Please enter the default timezone', $TimeZones, date_default_timezone_get());
-            $this->envUpdate('APP_TIMEZONE=', $timezone);
-
-            $currency = $this->choice('Please enter the default currency', ['USD', 'EUR'], 'USD');
-            $this->envUpdate('APP_CURRENCY=', $currency);
-
-            $this->addDatabaseDetails();
         } catch (\Exception $e) {
             $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again.');
         }
-    }
-
-    /**
-     * Add the database credentials to the .env file.
-     */
-    protected function addDatabaseDetails()
-    {
-        $dbName = $this->ask('What is the database name to be used by bagisto?');
-        $this->envUpdate('DB_DATABASE=', $dbName);
-
-        $dbUser = $this->anticipate('What is your database username?', ['root']);
-        $this->envUpdate('DB_USERNAME=', $dbUser);
-
-        $dbPass = $this->secret('What is your database password?');
-        $this->envUpdate('DB_PASSWORD=', $dbPass);
     }
 
     /**
