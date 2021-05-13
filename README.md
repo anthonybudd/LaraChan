@@ -1,8 +1,8 @@
 # LaraChan
-LaraChan is a simple 4chan-style imageboard built using Laravel.
+A simple 4chan-style imageboard built using Laravel.
 
 - 🤖 **CAPTCHA** - Self-hosted captchas.
-- 🚫 **No Js** - Tor ready, no use of JavaScript.
+- 🚫 **No .JS** - Tor ready, no use of JavaScript.
 - 🖥 **Laravel** - Built on Laravel 8.1
 - 🤓 **Simple** - Simple data-structure and codebase
 
@@ -15,7 +15,7 @@ LaraChan is a simple 4chan-style imageboard built using Laravel.
 LaraChan can be installed in 4 easy commands. 
 
 ```sh
-git clone
+git clone git@github.com:anthonybudd/LaraChan.git
 
 docker-compose up -d
 
@@ -28,19 +28,19 @@ php artisan serve
 ## Commands
 LaraChan comes with some commands to make managing your imageboard easy.
 
-### larachan:populate
+### $> larachan:populate
 To populate your instance with fake data run the command `php artisan larachan:populate`
 
-### larachan:create-board
+### $> larachan:create-board
 To create a new board run `php artisan larachan:create-board {boardName} {boardTitle} {about?}`
 
-### larachan:delete-board
+### $> larachan:delete-board
 To populate your instance with fake data run the command `php artisan larachan:delete-board {boardName}`
 
-### larachan:delete-thread
+### $> larachan:delete-thread
 To populate your instance with fake data run the command `php artisan larachan:delete-thread {uuid}`
 
-### larachan:delete-reply
+### $> larachan:delete-reply
 To populate your instance with fake data run the command `php artisan larachan:delete-reply {uuid}`
 
   
