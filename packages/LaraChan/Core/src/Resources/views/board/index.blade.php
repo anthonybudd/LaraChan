@@ -64,7 +64,7 @@
                     </div>
                     @endif
 
-                    @foreach($thread->replies->take(3) as $reply)
+                    @foreach($thread->latestReplies->reverse() as $reply)
                         @include('larachan::partials.reply', ['reply' => $reply])
                     @endforeach
 
