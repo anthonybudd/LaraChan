@@ -9,7 +9,7 @@ services:
         volumes:
             - ./:/app
         ports:
-            - '8000:8000'
+            - '80:8000'
 
     larachan-db:
         image: hypriot/rpi-mysql
