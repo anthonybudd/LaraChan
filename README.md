@@ -7,7 +7,7 @@ LaraChan is a simple 4chan-style imageboard built using Laravel.
 - 🤓 **Simple** - Simple data-structure and codebase
 
 <p  align="center">
-<img  width="800" src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/screenshot.gif"  alt="Larachan ScreenShot">
+<img  width="500" src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/screenshot.gif"  alt="Larachan ScreenShot">
 </p>
 
 
