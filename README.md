@@ -28,6 +28,7 @@ php artisan serve
 <sub><sup>⚠️ Hint: MySQL might take a miniute or so to initalize on first boot</sub></sup>
 
 ## Raspberry Pi Set-up
+To set-up a Raspberry Pi server run the following commands.
 ```sh
 git clone git@github.com:anthonybudd/LaraChan.git
 
@@ -36,6 +37,8 @@ cd LaraChan
 mv docker-compose.yml.arm64 docker-compose.yml
 
 docker-compose up
+
+docker exec -ti larachan composer install
 
 php artisan larachan:install
 ```
