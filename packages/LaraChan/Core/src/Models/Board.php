@@ -4,6 +4,7 @@ namespace LaraChan\Core\Models;
 
 use LaraChan\Core\Exceptions\BoardNotFoundException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Board extends Model
 {
@@ -14,14 +15,22 @@ class Board extends Model
      * @var array
      */
     protected $fillable = [
-        'board',
+        'name',
         'title',
         'about',
     ];
 
-    public static function findByBoard($board)
+    protected static function booted()
     {
-        $board = Self::where('board', $board)->get()->first();
+        static::created(function ($board) {
+            Cache::forget('boards');
+        });
+    }
+        
+
+    public static function findByBoard($name)
+    {
+        $board = Self::where('name', $name)->get()->first();
         if (!$board) throw new BoardNotFoundException;
         return $board;
     }
@@ -29,8 +38,21 @@ class Board extends Model
 
     public function threads()
     {
-        return $this->hasMany(Thread::class, 'board', 'board')
+        return $this->hasMany(Thread::class, 'board', 'name')
             ->orderBy('created_at', 'ASC');
+    }
+
+    public function getPopularThreads($page)
+    {
+        return Thread::where('board', $this->name)
+            ->orderByRaw('
+                LOG10( ABS( reply_count ) + 1 ) * 
+                SIGN( reply_count ) + 
+                ( UNIX_TIMESTAMP( created_at ) /300000 ) DESC
+            ')
+            ->skip(10 * $page)
+            ->take(10)
+            ->get();
     }
 
 }

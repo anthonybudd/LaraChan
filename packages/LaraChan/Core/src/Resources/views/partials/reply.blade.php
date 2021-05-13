@@ -1,10 +1,10 @@
 <div class="col-md-12 bg-light mb-2">
     <p class="mb-0">
-        Anonymous: {{ $reply->created_at }}
+        Anonymous: {{ $reply->created_at }} <small>{{ $reply->id }}</small>
     </p>
     
     @if($reply->hasImage())
-    <p class="mb-0">
+    <p>
         <a href="{{ $reply->image }}">
             {{ $reply->filename() }}
         </a>

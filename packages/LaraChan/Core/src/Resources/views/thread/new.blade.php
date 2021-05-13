@@ -11,10 +11,10 @@
 
     <div class="row justify-content-center mt-4 mx-0">
         <div class="col-md-6">
-            <form method="POST" enctype="multipart/form-data" action="/{{ $board->board }}/new-thread">
+            <form method="POST" enctype="multipart/form-data" action="/{{ $board->name }}/new-thread">
 
                 <input type="hidden" name="key" value="{{ $key }}">
-                <input type="hidden" name="board" value="{{ $board->board }}">
+                <input type="hidden" name="board" value="{{ $board->name }}">
                 
                 <div class="row g-3">
                     <div class="col-md-12">

@@ -14,7 +14,7 @@ class LaraChanSeeder extends Seeder
     public function run()
     {
         \LaraChan\Core\Models\Board::create([
-            'board' => 'r',
+            'name' => 'r',
             'title' => 'Random',
             'about' => 'A board.',
         ]);
@@ -23,7 +23,7 @@ class LaraChanSeeder extends Seeder
             'id' => 'd828a2c0-f1db-463f-9da2-f9d07eb2fea5',
             'board' => 'r',
             'title' => 'Welcome to LaraChan',
-            'image' => env('APP_URL').'/storage/images/code.png',
+            'image' => env('APP_URL').'/storage/larachan/images/code.png',
             'body' => 'Welcome to LaraChan',
         ]);
 

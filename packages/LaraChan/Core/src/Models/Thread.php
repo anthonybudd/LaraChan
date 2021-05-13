@@ -30,9 +30,7 @@ class Thread extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class, 'thread', 'id')->orderBy('created_at', 'ASC');
+        return $this->hasMany(Reply::class, 'thread', 'id')
+            ->orderBy('created_at', 'ASC');
     }
-
-    
-
 }

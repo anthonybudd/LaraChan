@@ -9,11 +9,22 @@
 		<div class="col-md-5 p-lg-5 mx-auto my-5 text-center ">
 			<h1 class="display-4 fw-normal">{{ $board->title }}</h1>
             <p class="lead">{{ $board->about }}</p>
-            <a href="/{{ $board->board }}/new-thread" class="btn btn-light btn-lg mt-4"">Start A Thread</a>
+            <a href="/{{ $board->name }}/new-thread" class="btn btn-light btn-lg mt-4"">Start A Thread</a>
 		</div>
 	</div>
 
-    <div class="row justify-content-center m-0">
+    <div class="row justify-content-center mx-0 mb-4">
+
+        @if(count($threads) === 0)
+        <div class="col-md-8 mt-4">
+            <div class="alert alert-dark">
+                <p>No threads found</p>
+
+                <a href="/">Home</a>
+            </div>
+        </div>
+        @endif
+
         @foreach($threads as $thread)
 		<div class="col-md-8 mt-4">
             <div class="container-fluid py-4 bg-primary-light">
@@ -27,6 +38,7 @@
                             <a href="{{ $thread->image }}">
                                 {{ $thread->filename() }}
                             </a>
+                            <small>{{ $thread->id }}</small>
                         </p>
                     </div>
                 </div>
@@ -46,19 +58,18 @@
                 
                 <div class="row mt-4">
 
-                    @if(count($thread->replies) !== 0)
+                    @if($thread->reply_count > 0)
                     <div class="col-md-12 mb-2">
-                        {{ count($thread->replies) }} replies. <a href="/{{$board->board}}/{{$thread->id}}/">Click here</a> to view.
+                        {{ $thread->reply_count }} replies. <a href="/{{$board->name}}/{{$thread->id}}/">Click here</a> to view.
                     </div>
                     @endif
 
-
-                    @foreach($thread->replies as $reply)
+                    @foreach($thread->replies->take(3) as $reply)
                         @include('larachan::partials.reply', ['reply' => $reply])
                     @endforeach
 
                     <div class="col-md-12">
-                        <a href="/{{$board->board}}/{{$thread->id}}#reply">Reply</a>
+                        <a href="/{{$board->name}}/{{$thread->id}}#reply">Reply</a>
                     </div>
                 </div>
             </div>
@@ -66,19 +77,7 @@
         @endforeach
     </div>
     
-    <div class="container mt-4">
-        <div class="col-md-12 ">
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
+    @include('larachan::partials.pagination')
+   
 </div>
 @stop

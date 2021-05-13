@@ -22,7 +22,7 @@ class CreateThreadsTable extends Migration
             $table->string('image');
             $table->longText('body');
 
-            $table->foreign('board')->references('board')->on('boards');
+            $table->foreign('board')->references('name')->on('boards');
         });
     }
 

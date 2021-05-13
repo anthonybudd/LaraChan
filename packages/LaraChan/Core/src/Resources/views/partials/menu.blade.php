@@ -2,7 +2,7 @@
     [
     <a class="text-white subtle" href="/">home</a> 
     @foreach($boards as $board)
-     / <a class="text-white subtle" href="/{{ $board->board }}">{{ $board->board }}</a>
+     / <a class="text-white subtle" href="/{{ $board->name }}">{{ $board->name }}</a>
     @endforeach
     ]
 </div>

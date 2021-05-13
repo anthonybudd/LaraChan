@@ -23,6 +23,7 @@
                             <a href="{{ $thread->image }}">
                                 {{ $thread->filename() }}
                             </a>
+                            <small>{{ $thread->id }}</small>
                         </p>
                     </div>
                 </div>

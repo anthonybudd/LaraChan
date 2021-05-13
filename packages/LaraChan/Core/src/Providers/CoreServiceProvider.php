@@ -5,6 +5,11 @@ namespace LaraChan\Core\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use LaraChan\Core\Commands\Install;
+use LaraChan\Core\Commands\Populate;
+use LaraChan\Core\Commands\CreateBoard;
+use LaraChan\Core\Commands\DeleteBoard;
+use LaraChan\Core\Commands\DeleteThread;
+use LaraChan\Core\Commands\DeleteReply;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -31,6 +36,11 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->commands([
             Install::class,
+            Populate::class,
+            CreateBoard::class,
+            DeleteBoard::class,
+            DeleteThread::class,
+            DeleteReply::class,
         ]);
     }
 

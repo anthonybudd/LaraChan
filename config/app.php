@@ -175,11 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // Captcha
-        Mews\Captcha\CaptchaServiceProvider::class,
+        
+        Mews\Captcha\CaptchaServiceProvider::class,         // Captcha
+        Barryvdh\Debugbar\ServiceProvider::class,           // Debugbar
 
-        // LaraChan
-        LaraChan\Core\Providers\CoreServiceProvider::class,
+        LaraChan\Core\Providers\CoreServiceProvider::class, // LaraChan
 
     ],
 
@@ -235,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

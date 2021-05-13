@@ -11,7 +11,7 @@ class HomepageController extends LaraChanBaseController
     public function homepage()
     {
         return view("larachan::homepage", [
-            "siteName" => env('APP_NAME'),
+            "siteName" => config('LaraChan.siteName'),
             "address" => config('LaraChan.onionAddress') ?? env('APP_URL'),
             "about" => config('LaraChan.about'),
         ]);        

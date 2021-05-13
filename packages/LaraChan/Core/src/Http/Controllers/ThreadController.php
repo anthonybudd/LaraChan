@@ -53,16 +53,17 @@ class ThreadController extends LaraChanBaseController
             'body'    => 'required',
             'captcha' => 'required|captcha_api:'.request('key'),
             'image'   => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'board'   => 'exists:boards,name',
         ])->validate();
 
         $imageName = Str::uuid()->toString().'.'.$request->image->extension();
-        $request->image->move(storage_path('images'), $imageName);
+        $request->image->move(storage_path('app/public/larachan/images'), $imageName);
 
         $thread = Thread::create([
             'board'  => $request->get('board'),          
             'title'  => $request->get('title'),
             'body'   => $request->get('body'),
-            'image'  => env('APP_URL').'/storage/images/'.$imageName,
+            'image'  => env('APP_URL').'/storage/larachan/images/'.$imageName,
         ]);
 
         return redirect()->route('singleThread', [
@@ -75,16 +76,18 @@ class ThreadController extends LaraChanBaseController
     public function reply(Request $request, $board, $threadID) 
     {
         Validator::make($request->all(), [
-            'comment'   => 'required',
-            'captcha'   => 'required|captcha_api:'.request('key'),
+            'comment' => 'required',
+            'captcha' => 'required|captcha_api:'.request('key'),
             'image'   => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'board'   => 'exists:boards,name',
+            'thread'  => 'exists:threads,id',
         ])->validate();
 
         $imagePath = null;
         if ($request->image) {
             $imageName = Str::uuid()->toString().'.'.$request->image->extension();
-            $request->image->move(storage_path('images'), $imageName);
-            $imagePath = env('APP_URL').'/storage/images/'.$imageName;
+            $request->image->move(storage_path('app/public/larachan/images'), $imageName);
+            $imagePath = env('APP_URL').'/storage/larachan/images/'.$imageName;
         }
 
         $thread = Thread::find($threadID);

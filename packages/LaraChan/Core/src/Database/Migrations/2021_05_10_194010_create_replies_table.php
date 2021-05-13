@@ -21,7 +21,7 @@ class CreateRepliesTable extends Migration
             $table->string('image')->nullable();
             $table->longText('comment');
 
-            $table->foreign('board')->references('board')->on('boards');
+            $table->foreign('board')->references('name')->on('boards');
             $table->foreign('thread')->references('id')->on('threads');
         });
     }
