@@ -1,5 +1,5 @@
 # LaraChan
-A simple 4chan-style imageboard built using Laravel.
+A simple 4chan-style imageboard built on Laravel.
 
 - 🤖 **CAPTCHA** - Self-hosted captchas.
 - 🚫 **No .JS** - Tor ready, no use of JavaScript.
