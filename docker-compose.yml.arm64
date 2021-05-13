@@ -12,7 +12,7 @@ services:
             - '8000:8000'
 
     larachan-db:
-        image: mariadb
+        image: hypriot/rpi-mysql
         restart: always
         network_mode: bridge
         container_name: larachan-db
@@ -21,6 +21,7 @@ services:
         ports:
             - '3306:3306'
         environment:
+            MYSQL_ROOT_PASSWORD: rootsecret
             MYSQL_DATABASE: larachan
             MYSQL_USER: app
             MYSQL_PASSWORD: secret
