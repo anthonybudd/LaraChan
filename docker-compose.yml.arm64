@@ -6,6 +6,8 @@ services:
         restart: always
         network_mode: bridge
         container_name: larachan
+        links:
+            - larachan-db
         volumes:
             - ./:/app
         ports:
@@ -16,6 +18,8 @@ services:
         restart: always
         network_mode: bridge
         container_name: larachan-db
+        links:
+            - larachan
         volumes:
             - ./.vol/larachan-db:/var/lib/mysql
         ports:
