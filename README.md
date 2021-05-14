@@ -2,9 +2,9 @@
 A simple 4chan-style imageboard built on Laravel.
 
 - 🤖 **CAPTCHA** - Self-hosted captchas.
-- 🚫 **No .JS** - Tor ready, no use of JavaScript.
+- 🚫 **No .JS** - No front-end JavaScript.
 - 🖥 **Laravel** - Built on Laravel 8.1
-- 🤓 **Simple** - Simple data-structure and codebase
+- 🧅 **Tor** - Built in Tor proxy
 
 <p  align="center">
 <img  width="500" src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/screenshot.gif"  alt="Larachan ScreenShot">
@@ -27,6 +27,10 @@ php artisan serve
 ```
 <sub><sup>⚠️ Hint: MySQL might take a miniute or so to initalize on first boot</sub></sup>
 
+<p  align="center">
+<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/pi.png" width="300" alt="Larachan Pi">
+</p>
+
 ## Raspberry Pi Set-up
 To set-up a Raspberry Pi server run the following commands.
 ```sh
@@ -36,11 +40,15 @@ cd LaraChan
 
 mv docker-compose.yml.arm64 docker-compose.yml
 
+docker-compose build
+
+docker run -it --rm -v $(pwd)/.vol/tor:/web larachan_larachan-tor-proxy generate ^lc
+
+docker run -it --rm -v $(pwd):/app larachan_larachan composer install
+
 docker-compose up
 
-docker exec -ti larachan composer install
-
-php artisan larachan:install
+docker exec -it larachan php artisan larachan:install --platform=pi
 ```
 
 ## Commands
@@ -67,6 +75,6 @@ LaraChan is in active development and breaking changes might be introduced.
 
 - Display validation errors (not working)
 - Admin interface
-- IPFS/TOR integration
+- IPFS integration
 - API
 - Tests
