@@ -64,7 +64,7 @@ class Populate extends Command
             'wg' => 'Wallpapers/General',
             'fa' => 'Fashion',
             'gd' => 'Graphic Design',
-            'dit' => 'Do-It-Yourself',
+            'diy' => 'Do-It-Yourself',
             'biz' => 'Business & Finance',
             'trv' => 'Travel',
             'x' => 'Paranormal',
@@ -95,17 +95,18 @@ class Populate extends Command
                     'image' => env('APP_URL').'/storage/larachan/images/code.png',
                     'body' => $faker->paragraph(),
                 ]);
-                sleep(1);
 
-                $replies = rand(20, 30);
-                for ($ii = 0; $ii < $replies; $ii++) {
-                    Reply::create([
+                $inserts = [];
+                for ($ii = 0; $ii < rand(20, 30); $ii++) {
+                    $inserts[] = [
+                        'id'  => Str::uuid()->toString(),
                         'board' => $board,
                         'thread' => $thread->id,
                         'image' => (rand(1, 3) === 1)? env('APP_URL').'/storage/larachan/images/code.png' : null,
                         'comment' => $faker->sentence(),
-                    ]);
-                }                
+                    ];
+                }
+                Reply::insert($inserts);              
             }
         }   
     }
