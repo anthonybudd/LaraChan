@@ -43,5 +43,3 @@ services:
             - larachan
         volumes:
             - ./.vol/tor:/web
-        ports:
-            - '80:80'
