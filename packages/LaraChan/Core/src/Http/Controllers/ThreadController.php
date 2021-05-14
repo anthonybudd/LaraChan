@@ -56,12 +56,14 @@ class ThreadController extends LaraChanBaseController
             'board'   => 'exists:boards,name',
         ])->validate();
 
-        $imageName = Str::uuid()->toString().'.'.$request->image->extension();
+        $id = Str::uuid()->toString();
+        $imageName = $id.'.'.$request->image->extension();
         $request->image->move(storage_path('app/public/larachan/images'), $imageName);
 
         $thread = Thread::create([
-            'board'  => $request->get('board'),          
-            'title'  => $request->get('title'),
+            'id'     => $id,          
+            'board'  => strip_tags($request->get('board')),          
+            'title'  => strip_tags($request->get('title')),
             'body'   => $request->get('body'),
             'image'  => env('APP_URL').'/storage/larachan/images/'.$imageName,
         ]);
@@ -80,12 +82,13 @@ class ThreadController extends LaraChanBaseController
             'captcha' => 'required|captcha_api:'.request('key'),
             'image'   => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'board'   => 'exists:boards,name',
-            'thread'  => 'exists:threads,id',
+            'thread'  => 'uuid|exists:threads,id',
         ])->validate();
 
+        $id = Str::uuid()->toString();
         $imagePath = null;
         if ($request->image) {
-            $imageName = Str::uuid()->toString().'.'.$request->image->extension();
+            $imageName = $id.'.'.$request->image->extension();
             $request->image->move(storage_path('app/public/larachan/images'), $imageName);
             $imagePath = env('APP_URL').'/storage/larachan/images/'.$imageName;
         }
@@ -93,10 +96,11 @@ class ThreadController extends LaraChanBaseController
         $thread = Thread::find($threadID);
 
         $reply = Reply::create([
+            'id'      => $id,
             'board'   => $thread->board,
             'thread'  => $thread->id, 
             'image'   => $imagePath,
-            'comment' => $request->get('comment'),
+            'comment' => strip_tags($request->get('comment')),
         ]);
 
         return back();
