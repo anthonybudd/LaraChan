@@ -38,7 +38,6 @@
                             <a href="{{ $thread->imageUrl() }}">
                                 {{ $thread->filename() }}
                             </a>
-                            <small>{{ $thread->id }}</small>
                         </p>
                     </div>
                 </div>

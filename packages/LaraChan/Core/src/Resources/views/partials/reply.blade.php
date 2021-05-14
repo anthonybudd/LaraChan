@@ -1,6 +1,6 @@
 <div class="col-md-12 bg-light mb-2">
     <p class="mb-0">
-        Anonymous: {{ $reply->created_at }} <small>{{ $reply->id }}</small>
+        Anonymous: {{ $reply->created_at }}
     </p>
     
     @if($reply->hasImage())
@@ -21,6 +21,7 @@
         </div>
     </div>
     @else
+        <small>{{ $reply->id }}</small>
         <p class="mt-2">{{ $reply->comment }}</p>
     @endif
 </div>
