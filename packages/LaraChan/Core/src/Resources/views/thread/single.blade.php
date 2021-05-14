@@ -20,7 +20,7 @@
                             {{ $thread->created_at }}
                         </p>
                         <p>
-                            <a href="{{ $thread->image }}">
+                            <a href="{{ $thread->imageUrl() }}">
                                 {{ $thread->filename() }}
                             </a>
                             <small>{{ $thread->id }}</small>
@@ -30,8 +30,8 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="{{ $thread->image }}">
-                            <img src="{{ $thread->image }}" class="w-100" />
+                        <a href="{{ $thread->imageUrl() }}">
+                            <img src="{{ $thread->imageUrl() }}" class="w-100" />
                         </a>
                     </div>
                     <div class="col-md-8">
