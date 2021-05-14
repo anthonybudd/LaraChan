@@ -5,15 +5,15 @@
     
     @if($reply->hasImage())
     <p>
-        <a href="{{ $reply->image }}">
+        <a href="{{ $reply->imageUrl() }}">
             {{ $reply->filename() }}
         </a>
     </p>
     
     <div class="row">
         <div class="col-md-4">
-            <a href="{{ $reply->image }}">
-                <img src="{{ $reply->image }}" class="w-100 mb-2" />
+            <a href="{{ $reply->imageUrl() }}">
+                <img src="{{ $reply->imageUrl() }}" class="w-100 mb-2" />
             </a>
         </div>
         <div class="col-md-8">

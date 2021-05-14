@@ -8,4 +8,6 @@ return [
     
     'onionAddress' => env('LARACHAN_ONION_ADDRESS', 'xxxxxxxxx.onion'),
 
+    'imageUrlPrefix' => env('LARACHAN_IMAGE_URL_PREFIX', '/storage/larachan/images/'),
+
 ];

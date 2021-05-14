@@ -12,4 +12,9 @@ trait Image
     {
         return basename($this->image);
     }
+
+    public function imageUrl()
+    {
+        return config('LaraChan.imageUrlPrefix').$this->fileName();
+    }
 }

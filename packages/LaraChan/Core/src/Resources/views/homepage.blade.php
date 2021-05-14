@@ -10,10 +10,7 @@
 	<div class="overflow-hidden m-0 text-center bg-primary text-white">
 		<div class="col-md-5 p-lg-5 mx-auto my-5">
 			<h1 class="display-4 fw-normal">{{ $siteName }}</h1>
-			<p class="lead">xxxxxxxxx.onion</p>
-
-            
-
+			<p class="lead">{{ $address }}</p>
 		</div>
 	</div>
 
@@ -23,9 +20,7 @@
 				<div class="card-header py-3">
 					<h4 class="my-0 fw-normal">About</h4>
 				</div>
-				<div class="card-body">
-					This is a LaraChan imageboard
-				</div>
+				<div class="card-body">{{ $about }}</div>
 			</div>
 		</div>
 		<div class="col-md-8">
