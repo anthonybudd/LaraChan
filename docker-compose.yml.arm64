@@ -11,15 +11,13 @@ services:
         volumes:
             - ./:/app
         ports:
-            - '80:8000'
+            - '80:80'
 
     larachan-db:
         image: hypriot/rpi-mysql
         restart: always
         network_mode: bridge
         container_name: larachan-db
-        links:
-            - larachan
         volumes:
             - ./.vol/larachan-db:/var/lib/mysql
         ports:
