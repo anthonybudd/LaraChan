@@ -16,6 +16,7 @@ class Thread extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'board',
         'title',
         'image',

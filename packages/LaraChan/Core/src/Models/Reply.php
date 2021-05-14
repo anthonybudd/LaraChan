@@ -16,6 +16,7 @@ class Reply extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'thread',
         'board',
         'image',

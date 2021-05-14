@@ -52,7 +52,7 @@ class DeleteBoard extends Command
             Board::where('name', $board)->delete();
         }
 
-        Cache::forget('boards');
+        Cache::forget('boards'); //TODO - Move to event inside Board model
 
         $this->info("Board /$board deleted");
     }

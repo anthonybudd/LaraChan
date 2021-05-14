@@ -13,7 +13,8 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'larachan:install';
+
+    protected $signature = 'larachan:install {--platform=pc}';
 
     /**
      * The console command description.
@@ -32,7 +33,7 @@ class Install extends Command
         parent::__construct();
     }
 
-    /**
+    /*
      * Install and configure larachan.
      */
     public function handle()
@@ -100,9 +101,13 @@ class Install extends Command
         try {
             File::copy('.env.example', '.env');
 
+            if ($this->option('platform') === 'pi') {
+                $this->envUpdate('DB_HOST=', 'larachan-db');
+            }
+
+            $this->envUpdate('DB_DATABASE=', 'larachan');
             $this->envUpdate('DB_DATABASE=', 'larachan');
             $this->envUpdate('DB_USERNAME=', 'app');
-            $this->envUpdate('DB_PASSWORD=', 'secret');
 
         } catch (\Exception $e) {
             $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again.');
