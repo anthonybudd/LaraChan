@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use LaraChan\Core\Commands\Install;
 use LaraChan\Core\Commands\Populate;
+use LaraChan\Core\Commands\Monitor;
 use LaraChan\Core\Commands\CreateBoard;
 use LaraChan\Core\Commands\DeleteBoard;
 use LaraChan\Core\Commands\DeleteThread;
@@ -37,6 +38,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->commands([
             Install::class,
             Populate::class,
+            Monitor::class,
             CreateBoard::class,
             DeleteBoard::class,
             DeleteThread::class,
