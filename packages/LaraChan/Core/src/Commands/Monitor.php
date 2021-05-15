@@ -73,7 +73,7 @@ class Monitor extends Command
                     $this->info($thread['body']);
                     
                     foreach ($thread['latest_replies'] as $reply) {
-                        $this->info("└─ ".$reply['comment']);
+                        $this->info("└─ ". $reply['id'] .' - '. $reply['comment']);
                     }
                     $this->info("");
                 }
