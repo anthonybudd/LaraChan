@@ -68,12 +68,24 @@ class Monitor extends Command
 
             if (count($threads) > 0) {
                 foreach ($threads as $thread) {
-                    $this->line(sprintf("/%s %s (Replies: %d)", $thread['board'], $thread['id'], $thread['reply_count']));
+                    
+                    $image = " ";
+                    if ($thread['image']) {
+                        $image = ".".pathinfo($thread['image'])['extension']." ";
+                    }
+
+                    $this->line(sprintf("/%s %s%s (Replies: %d)", $thread['board'], $thread['id'], $image, $thread['reply_count']));
                     $this->info($thread['title']);
                     $this->line($thread['body']);
+
                     
                     foreach ($thread['latest_replies'] as $reply) {
-                        $this->line("└─ ". $reply['id'] .' - '. $reply['comment']);
+                        $image = " ";
+                        if ($reply['image']) {
+                            $image = ".".pathinfo($reply['image'])['extension']." ";
+                        }
+
+                        $this->line("└─ ". $reply['id'] .' - '. $image . $reply['comment']);
                     }
                     $this->line("");
                 }
