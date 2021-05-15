@@ -19,7 +19,7 @@ class Monitor extends Command
      *
      * @var string
      */
-    protected $signature = 'larachan:monitor';
+    protected $signature = 'larachan:monitor {--threads=5} {--replies=5}';
 
     /**
      * The console command description.
@@ -46,38 +46,42 @@ class Monitor extends Command
         while (true) {
             $this->cls();
 
+            $threads = $this->option('threads');
+            $replies = $this->option('replies');
+
             $headers = ['UUID', 'B', 'R', 'title'];
+
             
-            $threads = Thread::select('id', 'board', 'reply_count', 'title')
+
+            $threads = Thread::with(['latestReplies' => function($query) use ($replies) {
+                $query->take($replies);
+            }])
+                ->select('id', 'board', 'reply_count', 'title', 'body')
                 ->orderByRaw('
                     LOG10( ABS( reply_count ) + 1 ) * 
                     SIGN( reply_count ) + 
                     ( UNIX_TIMESTAMP( created_at ) /300000 ) DESC
                 ')
-                ->take(15)
+                ->take($threads)
                 ->get()
                 ->toArray();
 
-            $this->table($headers, $threads);
-            
-            
-
-            $headers = ['UUID', 'Comment'];
-            
-            $replies = Reply::select('id', 'comment')
-                ->orderBy('created_at', 'DESC')
-                ->take(15)
-                ->get()
-                ->toArray();
-
-            $this->table($headers, $replies);
-
+            if (count($threads) > 0) {
+                foreach ($threads as $thread) {
+                    $this->info(sprintf("/%s %s (Replies: %d)", $thread['board'], $thread['id'], $thread['reply_count']));
+                    $this->line($thread['title']);
+                    $this->info($thread['body']);
+                    
+                    foreach ($thread['latest_replies'] as $reply) {
+                        $this->info("└─ ".$reply['comment']);
+                    }
+                    $this->info("");
+                }
+            }
 
 
-
-
-            $this->output->progressStart(60);
-            for ($i = 0; $i < 60; $i++) {
+            $this->output->progressStart(30);
+            for ($i = 0; $i < 30; $i++) {
                 sleep(1);
                 $this->output->progressAdvance();
             }
