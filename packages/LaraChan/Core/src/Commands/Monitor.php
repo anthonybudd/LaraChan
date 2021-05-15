@@ -54,8 +54,8 @@ class Monitor extends Command
             
 
             $threads = Thread::with(['latestReplies' => function($query) use ($replies) {
-                $query->take($replies);
-            }])
+                    $query->take($replies);
+                }])
                 ->select('id', 'board', 'reply_count', 'title', 'body')
                 ->orderByRaw('
                     LOG10( ABS( reply_count ) + 1 ) * 
@@ -68,14 +68,14 @@ class Monitor extends Command
 
             if (count($threads) > 0) {
                 foreach ($threads as $thread) {
-                    $this->info(sprintf("/%s %s (Replies: %d)", $thread['board'], $thread['id'], $thread['reply_count']));
-                    $this->line($thread['title']);
-                    $this->info($thread['body']);
+                    $this->line(sprintf("/%s %s (Replies: %d)", $thread['board'], $thread['id'], $thread['reply_count']));
+                    $this->info($thread['title']);
+                    $this->line($thread['body']);
                     
                     foreach ($thread['latest_replies'] as $reply) {
-                        $this->info("└─ ". $reply['id'] .' - '. $reply['comment']);
+                        $this->line("└─ ". $reply['id'] .' - '. $reply['comment']);
                     }
-                    $this->info("");
+                    $this->line("");
                 }
             }
 
