@@ -56,7 +56,7 @@ class Monitor extends Command
             $threads = Thread::with(['latestReplies' => function($query) use ($replies) {
                     $query->take($replies);
                 }])
-                ->select('id', 'board', 'reply_count', 'title', 'body')
+                ->select('id', 'board', 'reply_count', 'title', 'body', 'image')
                 ->orderByRaw('
                     LOG10( ABS( reply_count ) + 1 ) * 
                     SIGN( reply_count ) + 
