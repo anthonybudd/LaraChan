@@ -50,9 +50,6 @@ class Monitor extends Command
             $replies = $this->option('replies');
 
             $headers = ['UUID', 'B', 'R', 'title'];
-
-            
-
             $threads = Thread::with(['latestReplies' => function($query) use ($replies) {
                     $query->take($replies);
                 }])
@@ -76,16 +73,16 @@ class Monitor extends Command
 
                     $this->line(sprintf("/%s %s%s (Replies: %d)", $thread['board'], $thread['id'], $image, $thread['reply_count']));
                     $this->info($thread['title']);
-                    $this->line($thread['body']);
+                    $this->line('"'.$thread['body'].'"');
 
                     
                     foreach ($thread['latest_replies'] as $reply) {
                         $image = " ";
                         if ($reply['image']) {
-                            $image = ".".pathinfo($reply['image'])['extension']." ";
+                            $image = ".".pathinfo($reply['image'])['extension']." - ";
                         }
 
-                        $this->line("└─ ". $reply['id'] .' - '. $image . $reply['comment']);
+                        $this->line("└─ ". $reply['id'] .' - '. $image . '"'.$reply['comment']).'"';
                     }
                     $this->line("");
                 }

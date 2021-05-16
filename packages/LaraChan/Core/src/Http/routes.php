@@ -5,9 +5,10 @@
 Route::get('/{board}', [LaraChan\Core\Http\Controllers\BoardController::class, 'index']);
 
 Route::get('/{board}/new-thread', [LaraChan\Core\Http\Controllers\ThreadController::class, 'newThread'])
+    ->name('newThread')
     ->middleware(['web']);
 
-Route::post('{board}/new-thread', [LaraChan\Core\Http\Controllers\ThreadController::class, 'create']);
+Route::post('{board}/new-thread', [LaraChan\Core\Http\Controllers\ThreadController::class, 'create'])
 
 Route::get('/{board}/{threadID}',  [LaraChan\Core\Http\Controllers\ThreadController::class, 'single'])
     ->name('singleThread')

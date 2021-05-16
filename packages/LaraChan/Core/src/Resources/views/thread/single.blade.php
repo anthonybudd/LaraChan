@@ -50,15 +50,6 @@
     <div id="reply" class="row justify-content-center m-0">
         <div class="col-md-8 my-4">
             <hr class="my-4">
-            @if ($errors && $errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <form method="POST" enctype="multipart/form-data" action="/{{$thread->board}}/{{$thread->id}}">
                 
                 <input type="hidden" name="key" value="{{ $key }}">
@@ -67,14 +58,24 @@
 
                 <div class="row g-3">
                     <div class="col-md-12">
-                        <label for="comment" class="form-label">Comment</label>
-                        <textarea class="form-control" id="comment" name="comment" rows="3" ></textarea>
+                        <label for="comment" class="form-label">Comment</label>                        
+                        @if($formErrors !== false && $formErrors['errors']->has('comment'))
+                            <textarea class="form-control" id="comment" name="comment" rows="3" required="">{{ $formErrors['data']->comment }}</textarea>
+                            <div class="invalid-feedback d-block">{{ $formErrors['errors']->first('comment') }}</div>
+                        @elseif($formErrors !== false)
+                            <textarea class="form-control" id="comment" name="comment" rows="3" required="">{{ $formErrors['data']->comment }}</textarea>
+                        @else
+                            <textarea class="form-control" id="comment" name="comment" rows="3" required=""></textarea>
+                        @endif
                     </div>
                 </div>
                 <div class="row g-3 mt-2">
                     <div class="col-md-12">
                         <div class="input-group mb-3">
                             <input type="file" class="form-control" id="image" name="image" aria-label="Upload">
+                            @if($formErrors !== false && $formErrors['errors']->has('image'))
+                                <div class="invalid-feedback d-block">{{ $formErrors['errors']->first('image') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -83,6 +84,9 @@
                         <label for="comment" class="form-label">Captcha</label>
                         <img src="{{ $captcha }}" class="d-block mb-2" width="200" />
                         <input type="text" class="form-control mb-2" id="title" name="captcha"  placeholder="" value="" required="">
+                        @if($formErrors !== false && $formErrors['errors']->has('captcha'))
+                            <div class="invalid-feedback d-block">Invalid CAPTCHA</div>
+                        @endif
                     </div>
                 </div>
                 <div class="row g-3">

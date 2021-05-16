@@ -13,8 +13,7 @@ use Captcha;
 
 class ThreadController extends LaraChanBaseController
 {
-
-    public function single($board, $threadID)
+    public function single($board, $threadID, $formErrors = false)
     {
         try {
             
@@ -25,6 +24,7 @@ class ThreadController extends LaraChanBaseController
                 "thread" => $thread,
                 "captcha" => $captcha['img'],
                 "key" => $captcha['key'],
+                "formErrors" => $formErrors, //TODO - improve this.
             ]); 
             
         } catch (\Exception $e) {
@@ -33,7 +33,7 @@ class ThreadController extends LaraChanBaseController
     }
 
 
-    public function newThread($board)
+    public function newThread($board, $formErrors = false)
     {
         $captcha = Captcha::create('default', true);
 
@@ -41,20 +41,28 @@ class ThreadController extends LaraChanBaseController
             "board" => Board::findByBoard($board),
             "captcha" => $captcha['img'],
             "key" => $captcha['key'],
+            "formErrors" => $formErrors, //TODO - improve this.
         ]);        
     }
 
 
     public function create(Request $request)
     {
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'key'     => 'required',
-            'title'   => 'required',
-            'body'    => 'required',
+            'title'   => 'required|min:5|max:255',
+            'body'    => 'required|min:10',
             'captcha' => 'required|captcha_api:'.request('key'),
             'image'   => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'board'   => 'exists:boards,name',
-        ])->validate();
+        ]);
+
+        if ($validator->fails()) {            
+            return $this->newThread($request->get('board'), [
+                'data'   => (object) $validator->getData(),
+                'errors' => $validator->errors(),
+            ]);
+        }
 
         $id = Str::uuid()->toString();
         $imageName = $id.'.'.$request->image->extension();
@@ -77,13 +85,20 @@ class ThreadController extends LaraChanBaseController
 
     public function reply(Request $request, $board, $threadID) 
     {
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'comment' => 'required',
             'captcha' => 'required|captcha_api:'.request('key'),
             'image'   => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'board'   => 'exists:boards,name',
             'thread'  => 'uuid|exists:threads,id',
-        ])->validate();
+        ]);
+
+        if ($validator->fails()) {            
+            return $this->single($board, $threadID,  [
+                'data'   => (object) $validator->getData(),
+                'errors' => $validator->errors(),
+            ]);
+        }
 
         $id = Str::uuid()->toString();
         $imagePath = null;
