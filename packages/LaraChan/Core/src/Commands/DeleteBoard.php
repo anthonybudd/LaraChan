@@ -50,10 +50,8 @@ class DeleteBoard extends Command
             Reply::where('board', $board)->delete();
             Thread::where('board', $board)->delete();
             Board::where('name', $board)->delete();
+            Cache::forget('boards'); //TODO - Move to event inside Board model
+            $this->info("Board /$board deleted");
         }
-
-        Cache::forget('boards'); //TODO - Move to event inside Board model
-
-        $this->info("Board /$board deleted");
     }
 }

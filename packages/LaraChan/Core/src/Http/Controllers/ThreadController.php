@@ -93,7 +93,7 @@ class ThreadController extends LaraChanBaseController
             'thread'  => 'uuid|exists:threads,id',
         ]);
 
-        if ($validator->fails()) {            
+        if ($validator->fails()) { //TODO Improve this            
             return $this->single($board, $threadID,  [
                 'data'   => (object) $validator->getData(),
                 'errors' => $validator->errors(),

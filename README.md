@@ -1,10 +1,10 @@
 # LaraChan
 A simple 4chan-style imageboard built on Laravel.
 
+- 🧅 **Tor** - Built in Tor proxy
 - 🤖 **CAPTCHA** - Self-hosted captchas.
 - 🚫 **No .JS** - No front-end JavaScript.
-- 🖥 **Laravel** - Built on Laravel 8.1
-- 🧅 **Tor** - Built in Tor proxy
+- 🖥 **Laravel** - Built on Laravel 8
 
 <p  align="center">
 <img  width="500" src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/screenshot.gif"  alt="Larachan ScreenShot">
@@ -57,6 +57,12 @@ LaraChan comes with some commands to make managing your imageboard easy.
 ### $> larachan:populate
 To populate your instance with fake data run the command `php artisan larachan:populate`
 
+### $> larachan:monitor
+If you would like an automatically updating live view of all of the most popular threads on your imageboard use the command `php artisan larachan:monitor {--threads=5} {--replies=5}`
+
+### $> larachan:boards
+List all the current boards `php artisan larachan:boards`
+
 ### $> larachan:create-board
 To create a new board run `php artisan larachan:create-board {boardName} {boardTitle} {about?}`
 
@@ -71,10 +77,12 @@ To populate your instance with fake data run the command `php artisan larachan:d
 
   
 ## Todo
-LaraChan is in active development and breaking changes might be introduced.
+LaraChan is still in active development. 
 
-- Display validation errors (not working)
-- Admin interface
+- Admin Interface
 - IPFS integration
 - API
 - Tests
+- Support Paragraphs in text
+- "Syntax highlighting" replies
+- Fix validation - [hacky solution atm](https://github.com/anthonybudd/LaraChan/blob/8.x/packages/LaraChan/Core/src/Http/Controllers/ThreadController.php#L60), Validator::validate() not returning an error bag?
