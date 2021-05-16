@@ -8,6 +8,7 @@ use LaraChan\Core\Commands\Install;
 use LaraChan\Core\Commands\Populate;
 use LaraChan\Core\Commands\Monitor;
 use LaraChan\Core\Commands\CreateBoard;
+use LaraChan\Core\Commands\Boards;
 use LaraChan\Core\Commands\DeleteBoard;
 use LaraChan\Core\Commands\DeleteThread;
 use LaraChan\Core\Commands\DeleteReply;
@@ -40,6 +41,7 @@ class CoreServiceProvider extends ServiceProvider
             Populate::class,
             Monitor::class,
             CreateBoard::class,
+            Boards::class,
             DeleteBoard::class,
             DeleteThread::class,
             DeleteReply::class,

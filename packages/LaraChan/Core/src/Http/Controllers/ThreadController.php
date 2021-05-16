@@ -53,7 +53,7 @@ class ThreadController extends LaraChanBaseController
             'title'   => 'required|min:5|max:255',
             'body'    => 'required|min:10',
             'captcha' => 'required|captcha_api:'.request('key'),
-            'image'   => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'   => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
             'board'   => 'exists:boards,name',
         ]);
 
@@ -88,7 +88,7 @@ class ThreadController extends LaraChanBaseController
         $validator = Validator::make($request->all(), [
             'comment' => 'required',
             'captcha' => 'required|captcha_api:'.request('key'),
-            'image'   => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'   => 'image|mimes:jpeg,png,jpg,gif|max:10000',
             'board'   => 'exists:boards,name',
             'thread'  => 'uuid|exists:threads,id',
         ]);
