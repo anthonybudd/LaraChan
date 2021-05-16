@@ -83,6 +83,5 @@ LaraChan is still in active development.
 - IPFS integration
 - API
 - Tests
-- Support Paragraphs in text
 - "Syntax highlighting" replies
 - Fix validation - [hacky solution atm](https://github.com/anthonybudd/LaraChan/blob/8.x/packages/LaraChan/Core/src/Http/Controllers/ThreadController.php#L60), Validator::validate() not returning an error bag?

@@ -17,11 +17,11 @@
             </a>
         </div>
         <div class="col-md-8">
-            <p>{{ $reply->comment }}</p>
+            <p>{!! nl2br(e($reply->comment)) !!}</p>
         </div>
     </div>
     @else
         <small>{{ $reply->id }}</small>
-        <p class="mt-2">{{ $reply->comment }}</p>
+        <p class="mt-2">{!! nl2br(e($reply->comment)) !!}</p>
     @endif
 </div>

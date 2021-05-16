@@ -50,7 +50,7 @@
                         </a>
                     </div>
                     <div class="col-md-8">
-                        <p>{{ $thread->body }}</p>
+                        <p>{!! nl2br(e($thread->body)) !!}</p>
                     </div>
                 </div>
 
