@@ -41,4 +41,9 @@ class Thread extends Model
             ->orderBy('created_at', 'DESC')
             ->take(3);
     }
+
+    public function url()
+    {
+        return sprintf("%s/%s/%s", env('LARACHAN_ONION_ADDRESS', env('APP_URL')), $this->board, $this->id);
+    }
 }

@@ -84,4 +84,4 @@ LaraChan is still in active development.
 - API
 - Tests
 - "Syntax highlighting" replies
-- Fix validation - [hacky solution atm](https://github.com/anthonybudd/LaraChan/blob/8.x/packages/LaraChan/Core/src/Http/Controllers/ThreadController.php#L60), Validator::validate() not returning an error bag?
+- Fix validation - [hacky solution atm](https://github.com/anthonybudd/LaraChan/blob/8.x/packages/LaraChan/Core/src/Http/Controllers/ThreadController.php#L60), Validator::make()->validate() never returning an error bag? Probable session or Tor issue.

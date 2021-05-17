@@ -30,6 +30,9 @@
             <div class="container-fluid py-4 bg-primary-light">
                 <div class="row">
                     <div class="col-md-12">
+                        <p class="mb-0 font-10">
+                            {{ $thread->url() }}
+                        </p>
                         <p class="mb-0">
                             Anonymous: <span class="fw-bold">{{ $thread->title }}</span>
                             {{ $thread->created_at }}
@@ -57,11 +60,13 @@
                 
                 <div class="row mt-4">
 
-                    @if($thread->reply_count > 0)
                     <div class="col-md-12 mb-2">
+                    @if($thread->reply_count > 0)
                         {{ $thread->reply_count }} replies. <a href="/{{$board->name}}/{{$thread->id}}/">Click here</a> to view.
-                    </div>
+                    @else
+                        <a href="/{{$board->name}}/{{$thread->id}}/">Click here</a> to view thread.
                     @endif
+                    </div>
 
                     @foreach($thread->latestReplies->reverse() as $reply)
                         @include('larachan::partials.reply', ['reply' => $reply])

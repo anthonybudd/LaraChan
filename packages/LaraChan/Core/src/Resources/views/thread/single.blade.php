@@ -15,6 +15,9 @@
             <div class="container-fluid py-4 bg-primary-light">
                 <div class="row">
                     <div class="col-md-12">
+                        <p class="mb-0 font-10">
+                            {{ $thread->url() }}
+                        </p>
                         <p class="mb-0">
                             Anonymous: <span class="fw-bold">{{ $thread->title }}</span>
                             {{ $thread->created_at }}
