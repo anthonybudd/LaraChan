@@ -3,12 +3,13 @@
 namespace LaraChan\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaraChan\Core\Traits\Renderable;
 use LaraChan\Core\Traits\Uuids;
 use LaraChan\Core\Traits\Image;
 
 class Reply extends Model
 {
-    use Uuids, Image;
+    use Uuids, Image, Renderable;
     
     /**
      * The attributes that are mass assignable.
@@ -35,5 +36,4 @@ class Reply extends Model
     {
         return $this->belongsTo(Thread::class, 'thread');
     }
-
 }

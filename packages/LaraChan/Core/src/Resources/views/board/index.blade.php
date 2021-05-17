@@ -53,20 +53,18 @@
                         </a>
                     </div>
                     <div class="col-md-8">
-                        <p>{!! nl2br(e($thread->body)) !!}</p>
+                        <p>{!! $thread->render() !!}</p>
                     </div>
                 </div>
 
                 
                 <div class="row mt-4">
 
-                    <div class="col-md-12 mb-2">
                     @if($thread->reply_count > 0)
-                        {{ $thread->reply_count }} replies. <a href="/{{$board->name}}/{{$thread->id}}/">Click here</a> to view.
-                    @else
-                        <a href="/{{$board->name}}/{{$thread->id}}/">Click here</a> to view thread.
-                    @endif
+                    <div class="col-md-12 mb-2">
+                        {{ $thread->reply_count }} replies. <a href="/{{$board->name}}/{{$thread->id}}/">Click here</a> to view.                    
                     </div>
+                    @endif
 
                     @foreach($thread->latestReplies->reverse() as $reply)
                         @include('larachan::partials.reply', ['reply' => $reply])

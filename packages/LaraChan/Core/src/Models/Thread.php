@@ -3,12 +3,13 @@
 namespace LaraChan\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaraChan\Core\Traits\Renderable;
 use LaraChan\Core\Traits\Uuids;
 use LaraChan\Core\Traits\Image;
 
 class Thread extends Model
 {
-    use Uuids, Image;
+    use Uuids, Image, Renderable;
     
     /**s
      * The attributes that are mass assignable.

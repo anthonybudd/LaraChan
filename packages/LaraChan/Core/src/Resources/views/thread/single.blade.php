@@ -37,7 +37,7 @@
                         </a>
                     </div>
                     <div class="col-md-8">
-                        <p>{!! nl2br(e($thread->body)) !!}</p>
+                        <p>{!! $thread->render() !!}</p>
                     </div>
                 </div>
                 

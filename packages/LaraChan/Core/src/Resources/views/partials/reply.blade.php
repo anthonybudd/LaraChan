@@ -1,4 +1,4 @@
-<div class="col-md-12 bg-light mb-2">
+<div class="col-md-12 bg-light mb-2" id="{{ $reply->id }}">
     <p class="mb-0">
         Anonymous: {{ $reply->created_at }}
     </p>
@@ -17,11 +17,11 @@
             </a>
         </div>
         <div class="col-md-8">
-            <p>{!! nl2br(e($reply->comment)) !!}</p>
+            <p>{{ $reply->render() }}</p>
         </div>
     </div>
     @else
         <small>{{ $reply->id }}</small>
-        <p class="mt-2">{!! nl2br(e($reply->comment)) !!}</p>
+        <p class="mt-2">{!! $reply->render() !!}</p>
     @endif
 </div>
