@@ -53,6 +53,7 @@ class Populate extends Command
             't' => 'Technology',
             'w' => 'Weapons',
             'o' => 'Auto',
+            'ic' => 'Artwork/Critique',
             's' => 'Sports',
             'sci' => 'Science & Math',
             'his' => 'History & Humanities',
