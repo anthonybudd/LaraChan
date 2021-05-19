@@ -1,14 +1,15 @@
-# LaraChan
-A simple 4chan-style imageboard built on Laravel.
+<p  align="center">
+<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/logo-long.png" width="200" alt="LaraChan Logo">
+</p>
+
+## LaraChan
+A simple 4chan-style imageboard built on Laravel. 
 
 - 🧅 **Tor** - Built in Tor proxy
 - 🤖 **CAPTCHA** - Self-hosted captchas.
 - 🚫 **No .JS** - No front-end JavaScript.
 - 🖥 **Laravel** - Built on Laravel 8
 
-<p  align="center">
-<img  width="500" src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/screenshot.gif"  alt="Larachan ScreenShot">
-</p>
 
 
 ## Getting Started
@@ -28,7 +29,7 @@ php artisan serve
 <sub><sup>⚠️ Hint: MySQL might take a miniute or so to initalize on first boot</sub></sup>
 
 <p  align="center">
-<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/pi.png" width="300" alt="Larachan Pi">
+<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/pi.png" width="300" alt="LaraChan Pi">
 </p>
 
 ## Raspberry Pi Set-up
@@ -55,25 +56,32 @@ docker exec -it larachan php artisan larachan:install --platform=pi
 LaraChan comes with some commands to make managing your imageboard easy.
 
 ### $> larachan:populate
-To populate your instance with fake data run the command `php artisan larachan:populate`
+To populate your instance with fake data run the command 
+`php artisan larachan:populate`
 
 ### $> larachan:monitor
-If you would like an automatically updating live view of all of the most popular threads on your imageboard use the command `php artisan larachan:monitor {--threads=5} {--replies=5}`
+If you would like an automatically updating live view of all of the most popular threads on your imageboard use the command 
+`php artisan larachan:monitor {--threads=5} {--replies=5}`
 
 ### $> larachan:boards
-List all the current boards `php artisan larachan:boards`
+List all the current boards 
+`php artisan larachan:boards`
 
 ### $> larachan:create-board
-To create a new board run `php artisan larachan:create-board {boardName} {boardTitle} {about?}`
+To create a new board run 
+`php artisan larachan:create-board {boardName} {boardTitle} {about?}`
 
 ### $> larachan:delete-board
-To populate your instance with fake data run the command `php artisan larachan:delete-board {boardName}`
+To populate your instance with fake data run the command 
+`php artisan larachan:delete-board {boardName}`
 
 ### $> larachan:delete-thread
-To populate your instance with fake data run the command `php artisan larachan:delete-thread {uuid}`
+To populate your instance with fake data run the command 
+`php artisan larachan:delete-thread {uuid}`
 
 ### $> larachan:delete-reply
-To populate your instance with fake data run the command `php artisan larachan:delete-reply {uuid}`
+To populate your instance with fake data run the command 
+`php artisan larachan:delete-reply {uuid}`
 
   
 ## Todo
