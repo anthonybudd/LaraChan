@@ -16,3 +16,4 @@ Route::get('/{board}/{threadID}',  [LaraChan\Core\Http\Controllers\ThreadControl
 
 Route::post('/{board}/{threadID}', [LaraChan\Core\Http\Controllers\ThreadController::class, 'reply']);
 
+Route::post('/redirect/{url}', [LaraChan\Core\Http\Controllers\RedirectController::class, 'redirect']);

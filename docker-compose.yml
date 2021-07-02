@@ -15,3 +15,13 @@ services:
             MYSQL_DATABASE: larachan
             MYSQL_USER: app
             MYSQL_PASSWORD: secret
+
+    larachan-tor-proxy:
+        build:
+            context: ./packages/LaraChan/Core/docker/larachan-tor-proxy
+            dockerfile: Dockerfile
+        restart: always
+        network_mode: bridge
+        container_name: larachan-tor-proxy
+        volumes:
+            - ./.vol/tor:/web

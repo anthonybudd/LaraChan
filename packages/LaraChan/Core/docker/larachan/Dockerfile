@@ -25,4 +25,3 @@ RUN a2enmod rewrite
 
 COPY . /app
 WORKDIR /app
-

@@ -24,28 +24,28 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/../Http/routes.php');
 
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        // $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'larachan');
+        // $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'larachan');
 
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('vendor/lc/assets'),
-        ], 'public');
+        // $this->publishes([
+        //     __DIR__ . '/../../publishable/assets' => public_path('vendor/lc/assets'),
+        // ], 'public');
 
-        $this->publishes([
-            __DIR__ . '/../../publishable/LaraChan.php' => config_path('LaraChan.php'),
-        ], 'public');
+        // $this->publishes([
+        //     __DIR__ . '/../../publishable/LaraChan.php' => config_path('LaraChan.php'),
+        // ], 'public');
 
-        $this->commands([
-            Install::class,
-            Populate::class,
-            Monitor::class,
-            CreateBoard::class,
-            Boards::class,
-            DeleteBoard::class,
-            DeleteThread::class,
-            DeleteReply::class,
-        ]);
+        // $this->commands([
+        //     Install::class,
+        //     Populate::class,
+        //     Monitor::class,
+        //     CreateBoard::class,
+        //     Boards::class,
+        //     DeleteBoard::class,
+        //     DeleteThread::class,
+        //     DeleteReply::class,
+        // ]);
     }
 
     /**
