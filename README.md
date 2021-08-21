@@ -1,5 +1,5 @@
 <p  align="center">
-<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/logo-long.png" width="200" alt="LaraChan Logo">
+<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/larachan.png" width="200" alt="LaraChan Logo">
 </p>
 
 ## LaraChan
@@ -39,11 +39,13 @@ git clone git@github.com:anthonybudd/LaraChan.git
 
 cd LaraChan
 
+git clone git@github.com:anthonybudd/nginx-tor-proxy.git
+
 mv docker-compose.yml.arm64 docker-compose.yml
 
 docker-compose build
 
-docker run -it --rm -v $(pwd)/.vol/tor:/web larachan_larachan-tor-proxy generate ^lc
+docker run -ti --entrypoint="mkp224o" -v $(pwd)/found-addresses:/found-addresses nginx-tor-proxy_nginx-tor-proxy -n 1 -S 10 -d /found-addresses chan
 
 docker run -it --rm -v $(pwd):/app larachan_larachan composer install
 
