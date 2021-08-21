@@ -39,15 +39,19 @@ git clone git@github.com:anthonybudd/LaraChan.git
 
 cd LaraChan
 
-git clone git@github.com:anthonybudd/nginx-tor-proxy.git
-
 mv docker-compose.yml.arm64 docker-compose.yml
 
 docker-compose build
 
-docker run -ti --entrypoint="mkp224o" -v $(pwd)/found-addresses:/found-addresses nginx-tor-proxy_nginx-tor-proxy -n 1 -S 10 -d /found-addresses chan
-
 docker run -it --rm -v $(pwd):/app larachan_larachan composer install
+
+// TOR
+git clone git@github.com:anthonybudd/nginx-tor-proxy.git
+docker run -ti --entrypoint="mkp224o" -v $(pwd):/tor nginx-tor-proxy_nginx-tor-proxy -n 1 -S 10 -d /tor [FILTER] 
+mv *.onion web
+chmod 700 web
+sed -ie 's#xxxxx.onion#'"$(cat web/hostname)"'#g' nginx/tor.conf
+cat web/hostname
 
 docker-compose up
 

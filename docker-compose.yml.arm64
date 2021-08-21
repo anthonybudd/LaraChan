@@ -32,7 +32,7 @@ services:
 
     larachan-tor-proxy:
         build:
-            context: ./packages/LaraChan/Core/docker/larachan-tor-proxy
+            context: ./nginx-tor-proxy
             dockerfile: Dockerfile
         restart: always
         network_mode: bridge
@@ -42,4 +42,5 @@ services:
         depends_on:
             - larachan
         volumes:
-            - ./.vol/tor:/web
+            - ./nginx-tor-proxy/web:/web
+            - ./nginx-tor-proxy/nginx:/nginx
