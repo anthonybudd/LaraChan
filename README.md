@@ -29,7 +29,7 @@ php artisan serve
 <sub><sup>⚠️ Hint: MySQL might take a miniute or so to initalize on first boot</sub></sup>
 
 <p  align="center">
-<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/pi.png" width="300" alt="LaraChan Pi">
+<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/pi.png" width="500" alt="LaraChan Pi">
 </p>
 
 ## Raspberry Pi Set-up
