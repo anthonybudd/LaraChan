@@ -35,22 +35,6 @@ php artisan serve
 ## Raspberry Pi Set-up
 To set-up a Raspberry Pi server run the following commands.
 ```sh
-// Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo groupadd docker
-sudo usermod -aG docker $USER
-sudo systemctl enable docker
-
-// Docker-Compose
-sudo apt-get install libffi-dev libssl-dev
-sudo apt install python3-dev
-sudo apt-get install -y python3 python3-pip
-sudo pip3 install docker-compose
-
-
-
-
 git clone git@github.com:anthonybudd/LaraChan.git
 
 cd LaraChan
