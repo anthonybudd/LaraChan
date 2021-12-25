@@ -35,23 +35,40 @@ php artisan serve
 ## Raspberry Pi Set-up
 To set-up a Raspberry Pi server run the following commands.
 ```sh
+// Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo systemctl enable docker
+
+// Docker-Compose
+sudo apt-get install libffi-dev libssl-dev
+sudo apt install python3-dev
+sudo apt-get install -y python3 python3-pip
+sudo pip3 install docker-compose
+
+
+
+
 git clone git@github.com:anthonybudd/LaraChan.git
 
 cd LaraChan
 
-mv docker-compose.yml.arm64 docker-compose.yml
-
-docker-compose build
-
-docker run -it --rm -v $(pwd):/app larachan_larachan composer install
+mv docker-compose.arm64.yml docker-compose.yml
 
 // TOR
-git clone git@github.com:anthonybudd/nginx-tor-proxy.git
-docker run -ti --entrypoint="mkp224o" -v $(pwd):/tor nginx-tor-proxy_nginx-tor-proxy -n 1 -S 10 -d /tor [FILTER] 
+git clone git@github.com:anthonybudd/nginx-tor-proxy.git && cd nginx-tor-proxy
+docker run -ti --entrypoint="mkp224o" -v $(pwd):/tor larachan_larachan-tor-proxy -n 1 -S 10 -d /tor [FILTER] 
 mv *.onion web
 chmod 700 web
 sed -ie 's#xxxxx.onion#'"$(cat web/hostname)"'#g' nginx/tor.conf
 cat web/hostname
+cd ..
+
+docker-compose build
+
+docker run -it --rm -v $(pwd):/app larachan_larachan composer install
 
 docker-compose up
 
@@ -77,16 +94,19 @@ List all the current boards
 To create a new board run 
 `php artisan larachan:create-board {boardName} {boardTitle} {about?}`
 
+Example
+`php artisan larachan:create-board pol "Politically Incorrect"`
+
 ### $> larachan:delete-board
-To populate your instance with fake data run the command 
+To delete a board 
 `php artisan larachan:delete-board {boardName}`
 
 ### $> larachan:delete-thread
-To populate your instance with fake data run the command 
+To delete a thread 
 `php artisan larachan:delete-thread {uuid}`
 
 ### $> larachan:delete-reply
-To populate your instance with fake data run the command 
+To delete a reply
 `php artisan larachan:delete-reply {uuid}`
 
   
