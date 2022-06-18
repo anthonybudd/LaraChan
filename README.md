@@ -1,5 +1,5 @@
 <p  align="center">
-<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/larachan.png" width="200" alt="LaraChan Logo">
+<img src="https://raw.githubusercontent.com/anthonybudd/LaraChan/8.x/docs/img/larachan.png" width="500" alt="LaraChan Logo">
 </p>
 
 ## LaraChan
